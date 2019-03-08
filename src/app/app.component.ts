@@ -40,7 +40,10 @@ window.onload = function () {
 function calculatePatrons() {
   //var cantidad_procesadores = prompt("agregue la cantida de procesadores que desea"); //mas adelante va a ser cuadro de texto
   //var cantidad_bits = prompt("cantidad de bit a utilizar"); //mas adelante auto calcular
-  var cantidad_procesadores =8;
+  //var cantidad_procesadores =8;
+  var cantidad_procesadores =document.getElementById('cantProc').value;
+  console.log("cantidad de bit : " + cantidad_bits);
+
   //var cantidad_bits = (parseInt(cantidad_procesadores)).toString(2); // CAMBIO A PEDIR LOS BITS
   //cantidad_bits = cantidad_bits.length - 1;
   var cantidad_bits =3;
