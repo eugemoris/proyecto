@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as $ from 'jquery';
 
 var patrones = [];
 
@@ -41,7 +42,9 @@ function calculatePatrons() {
   //var cantidad_procesadores = prompt("agregue la cantida de procesadores que desea"); //mas adelante va a ser cuadro de texto
   //var cantidad_bits = prompt("cantidad de bit a utilizar"); //mas adelante auto calcular
   //var cantidad_procesadores =8;
-  var cantidad_procesadores =document.getElementById('cantProc').value;
+  
+
+  var cantidad_procesadores = jQuery("#cantProc").val()
   console.log("cantidad de bit : " + cantidad_bits);
 
   //var cantidad_bits = (parseInt(cantidad_procesadores)).toString(2); // CAMBIO A PEDIR LOS BITS
