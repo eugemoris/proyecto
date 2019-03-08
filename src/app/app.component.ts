@@ -33,23 +33,26 @@ window.onload = function () {
       patrones.push(5);
   }
   document.getElementById("start").onclick = function (evt) {
-      console.log("patrones elegidos: " + patrones);
-      calculatePatrons();
+        var cantProc = $("#cantProc").val();
+        console.log("El valor es: "+ $("#cantProc").val());
+        console.log("patrones elegidos: " + patrones);
+        calculatePatrons(cantProc);
   }
 }
 
-function calculatePatrons() {
+function calculatePatrons(cantidad_procesadores) {
   //var cantidad_procesadores = prompt("agregue la cantida de procesadores que desea"); //mas adelante va a ser cuadro de texto
   //var cantidad_bits = prompt("cantidad de bit a utilizar"); //mas adelante auto calcular
   //var cantidad_procesadores =8;
-  
+ 
 
-  var cantidad_procesadores = jQuery("#cantProc").val()
+  //var cantidad_procesadores = jQuery("#cantProc").val()
+    console.log("cantidad procesadores: "+ cantidad_procesadores);
+  var cantidad_bits_bin = (parseInt(cantidad_procesadores)).toString(2); // CAMBIO A PEDIR LOS BITS
+  var cantidad_bits = (cantidad_bits_bin.length) - 1;
   console.log("cantidad de bit : " + cantidad_bits);
 
-  //var cantidad_bits = (parseInt(cantidad_procesadores)).toString(2); // CAMBIO A PEDIR LOS BITS
-  //cantidad_bits = cantidad_bits.length - 1;
-  var cantidad_bits =3;
+  //var cantidad_bits =3;
   var input = [];
   var cant = 0;
   for (var i = 0; i < cantidad_procesadores; i++) {
