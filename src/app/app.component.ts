@@ -269,4 +269,91 @@ function butterfly(input, processors) {
 
 }
 
+function bit_reversal(input, processors) {
+    console.log("entrada de bit reversal: " + input);
+
+    var output = [];
+    var zeros = [];
+    var j =0;
+    for (j = 0; j < processors; j++) {
+        zeros.push("0");
+    }
+    var size = input.length;
+    //console.log("tamaño de input" + size)
+    var i = 0;
+    for (i = 0; i < size; i++) {
+        var valor = input.shift();
+        var output_i = (valor >>> 0).toString(2);
+        var output_arr = output_i.split('');
+        output_arr = zeros.concat(output_arr);
+        output_arr = output_arr.slice(-processors, output_arr.length)
+        var output_j = [];
+        //console.log(output_i);
+        var length_arr = output_arr.length;
+        for (j = 0; j < output_arr.length; j++) {
+            output_j.unshift(output_arr[j]);
+        }
+        //console.log(output_j);
+
+        var out = output_j.toString()
+
+        out = out.replace(/,/g, '');
+        //output.push(out);
+        //console.log(out);
+        var dec = bin2dec(out);
+        output.push(dec)
+        console.log("salida de bit reversal: " + dec);
+
+        output_arr = [];
+        output_j = [];
+        out = '';
+        
+    }
+    return output;
+}
+
+function perfect_shuffle(input, processors) {
+    console.log("entrada de perfect shuffle: " + input);
+    var k = prompt("Valor de K que desee utilizar: ");
+    var sh = Math.round(Math.log2(parseInt(k)));
+    var output = [];
+    var zeros = [];
+    //var j = 0;
+    for (var j = 0; j < processors; j++) {
+        zeros.push("0");
+    }
+    var size = input.length;
+    //console.log("tamaño de input" + size)
+    for (var i = 0; i < size; i++) {
+        var valor = input.shift();
+
+        var output_i = (valor >>> 0).toString(2);
+        output_i = output_i.split('');        
+        output_i = zeros.concat(output_i);
+        output_i = output_i.slice(-processors,output_i.lenght)
+        //console.log(output_i);
+
+        for (j = 0; j < sh; j++) {
+            last_value = output_i[0];
+            output_i.shift();
+            output_i.push(last_value);
+        }
+
+        var out = output_i.toString()
+
+        out = out.replace(/,/g, '');
+        //output.push(out);
+        //console.log(out);
+        dec = bin2dec(out);
+        output.push(dec)
+        console.log("salida oerfect shuffle " + dec);
+
+        output_i = NaN;
+        out = NaN;
+    }
+    //console.log(output);
+    return output;
+}
+
+
 
