@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as $ from 'jquery';
 
 var patrones = [];
+var input_extra = [];
 var list_output = [];
 
 @Component({
@@ -16,49 +17,63 @@ export class AppComponent {
 window.onload = function () {
     
   document.getElementById("p_shuffle").onclick = function (evt) {
-      patrones.push(0);
+    var k = prompt("Valor de K que desee utilizar: ");
+    input_extra.push(parseInt(k));
+    patrones.push(0);
   }
   document.getElementById("bit_reversal").onclick = function (evt) {
+      input_extra.push(-1);
       patrones.push(1);
   }
   document.getElementById("butterfly").onclick = function (evt) {
-      patrones.push(2);
+    var input_xi = prompt("Valor de I que desee utilizar: ");
+    input_extra.push(parseInt(input_xi));
+    patrones.push(2);
   }
   document.getElementById("exchange").onclick = function (evt) {
-      patrones.push(3);
+    var input_k = prompt("Valor de K que desee utilizar: ");
+    input_extra.push(parseInt(input_k));
+    patrones.push(3);
   }
   document.getElementById("barrel").onclick = function (evt) {
+
       patrones.push(4);
   }
   document.getElementById("baseline").onclick = function (evt) {
+    var k = prompt("Valor de K que desee utilizar: ");
+    input_extra.push(parseInt(k));
       patrones.push(5);
   }
   document.getElementById("start").onclick = function (evt) {
-        var cantProc = $("#cantProc").val();
-        //console.log("El valor es: "+ $("#cantProc").val());
-        //console.log("patrones elegidos: " + patrones);
+        var cantProc = $("#cantProc").val(); //se toma el valor de cuadro de texto
         calculatePatrons(cantProc);
+  }
+  document.getElementById("restart").onclick = function (evt) {
+    patrones = [];
+    input_extra = [];
+    list_output = [];
   }
 }
 
-function calculatePatrons(cantidad_procesadores) {
-  //var cantidad_procesadores = prompt("agregue la cantida de procesadores que desea"); //mas adelante va a ser cuadro de texto
-  //var cantidad_bits = prompt("cantidad de bit a utilizar"); //mas adelante auto calcular
-  //var cantidad_procesadores =8;
- 
+function generate_input(cantProcesadores){
+    var input = [];
+    var cant = 0;
+    for (var i = 0; i < cantProcesadores; i++) {
+        input.push(i);
+    }
+    return input;
+}
 
-  //var cantidad_procesadores = jQuery("#cantProc").val()
-    //console.log("cantidad procesadores: "+ cantidad_procesadores);
+
+function calculatePatrons(cantidad_procesadores) {
+
   var cantidad_bits_bin = (parseInt(cantidad_procesadores)).toString(2); // CAMBIO A PEDIR LOS BITS
   var cantidad_bits = (cantidad_bits_bin.length) - 1;
-  //console.log("cantidad de bit : " + cantidad_bits);
 
-  //var cantidad_bits =3;
-  var input = [];
-  var cant = 0;
-  for (var i = 0; i < cantidad_procesadores; i++) {
-      input.push(i);
-  }
+  console.log("patrones en el arreglo: " + patrones);
+  console.log("input extra: " + input_extra);
+
+  
   var continuar = false;
   if (patrones.length != 0) {
       continuar = true;
@@ -66,45 +81,70 @@ function calculatePatrons(cantidad_procesadores) {
   else {
       alert("no se selecciono ningun patron")
   }
-  //console.log(patrones);
+
   while (continuar) {
-      //console.log(pat);
+
       var x = patrones.shift();
       switch (x) {
           case 0:
               // codigo correspondiente a perfect shuflle
-              var output = perfect_shuffle(input, cantidad_bits);
+              var extra_value = input_extra.shift();
+              var input = generate_input(cantidad_procesadores);
+              var output = perfect_shuffle(input, cantidad_bits,extra_value);
               list_output.push(output);
+              console.log("perfectShufle" + output);
               break;
 
           case 1:
               // codigo correspondiente a bit reversal
+              var extra_value = input_extra.shift();
+              var input = generate_input(cantidad_procesadores);
+
               var output = bit_reversal(input, cantidad_bits);
               list_output.push(output);
+              console.log("bitReversal" + output);
+
               break;
 
           case 2:
               // codigo correspondiente a butterfly
-              var output = butterfly(input, cantidad_bits);
+              var extra_value = input_extra.shift();
+              var input = generate_input(cantidad_procesadores);
+
+              var output = butterfly(input, cantidad_bits,extra_value);
               list_output.push(output);
+              console.log("butterfly" + output);
+
               break;
 
           case 3:
             // codigo correspondiente a exchange
-            var output = exchange(input, cantidad_bits);
+            var extra_value = input_extra.shift();
+
+            var input = generate_input(cantidad_procesadores);
+        
+            var output = exchange(input, cantidad_bits,extra_value);
             list_output.push(output);
+            console.log("exchange" + output);
+
             break;
 
           case 4:
             // codigo correspondiente a barrel
-            //var output = barrel(input, cantidad_bits);
+            //var extra_value = input_extra.shift();
+            //var output = barrel(input, cantidad_bits,extra_value);
             //list_output.push(output);
             break;
 
           case 5:
             // codigo correspondiente a baseline
-            var output = baseline(input, cantidad_bits);
+            var extra_value = input_extra.shift();
+            var input = generate_input(cantidad_procesadores);
+
+            var output = baseline(input, cantidad_bits,extra_value);
             list_output.push(output);
+            console.log("baseline" + output);
+
             break;
 
           default:
@@ -123,8 +163,8 @@ function bin2dec(bin) {
   return parseInt(bin, 2).toString(10);
 }
 
-function baseline(input, processors) { //processor nos da la cantidad de bits que se utilizan
-  var k = prompt("Valor de K que desee utilizar: ");
+function baseline(input, processors,k) { //processor nos da la cantidad de bits que se utilizan
+  //var k = prompt("Valor de K que desee utilizar: ");
   var size = input.length;
   var lista = [];
   var zeros = [];
@@ -173,10 +213,10 @@ function baseline(input, processors) { //processor nos da la cantidad de bits qu
   }
 }
 
-function exchange(input, processors) {
+function exchange(input, processors,k) {
   //el input viene con los valores decimales
-  var input_k = prompt("Valor de K que desee utilizar: ");
-  var k = parseInt(input_k);
+  //var input_k = prompt("Valor de K que desee utilizar: ");
+  //var k = parseInt(input_k);
   var size = input.length;
   var output = [];
   var zeros = [];
@@ -219,11 +259,11 @@ function exchange(input, processors) {
   return output;
 }
 
-function butterfly(input, processors) {
+function butterfly(input, processors,xi) {
 
-  console.log("input in butterfly" + input);
-  var input_xi = prompt("Valor de I que desee utilizar: ");
-  var xi = parseInt(input_xi);
+  //console.log("input in butterfly" + input);
+  //var input_xi = prompt("Valor de I que desee utilizar: ");
+  //var xi = parseInt(input_xi);
   var xj = (processors - 1) - xi;;
   var output = [];
   var zeros = [];
@@ -238,7 +278,7 @@ function butterfly(input, processors) {
       var valor = input.shift();
 
       var output_i = (valor >>> 0).toString(2);
-      console.log("entrada butterfly en binario: " + output_i);
+      //console.log("entrada butterfly en binario: " + output_i);
 
       var output_arr = output_i.split('');
       output_arr = zeros.concat(output_arr);
@@ -264,7 +304,7 @@ function butterfly(input, processors) {
 
       out = out.replace(/,/g, '');
       //console.log(out);
-      console.log('salida butterfly en binario: ' + out);
+      //console.log('salida butterfly en binario: ' + out);
       var dec = bin2dec(out);
       output.push(dec)
       console.log("salida del butterfly: " + dec)
@@ -316,9 +356,9 @@ function bit_reversal(input, processors) {
     return output;
 }
 
-function perfect_shuffle(input, processors) {
+function perfect_shuffle(input, processors,k) {
     console.log("entrada de perfect shuffle: " + input);
-    var k = prompt("Valor de K que desee utilizar: ");
+    //var k = prompt("Valor de K que desee utilizar: ");
     var sh = Math.round(Math.log2(parseInt(k)));
     var output = [];
     var zeros = [];
