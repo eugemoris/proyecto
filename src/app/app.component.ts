@@ -64,26 +64,26 @@ function calculatePatrons() {
           case 0:
               // codigo correspondiente a perfect shuflle
               console.log("entro en cero");
-              //var output = perfect_shuffle(input, cantidad_bits);
-              //console.log(output);
+              var output = perfect_shuffle(input, cantidad_bits);
+              console.log(output);
               //momento para graficar
-              //input = output; //salida de metodos en decimales
+              input = output; //salida de metodos en decimales
               break;
           case 1:
               // codigo correspondiente a bit reversal
               console.log("entro en uno" + input);
 
-              //var output = bit_reversal(input, cantidad_bits);
+              var output = bit_reversal(input, cantidad_bits);
               //momento para graficar
-              //input = output; //salida de metodos en decimales
+              input = output; //salida de metodos en decimales
               break;
           case 2:
               // codigo correspondiente a butterfly
               console.log("entro en dos" + input);
 
-              //var output = butterfly(input, cantidad_bits);
+              var output = butterfly(input, cantidad_bits);
               //momento para graficar
-              //input = output; //salida de metodos en decimales
+              input = output; //salida de metodos en decimales
               break;
           case 3:
               // codigo correspondiente a exchange
@@ -328,28 +328,28 @@ function perfect_shuffle(input, processors) {
         var valor = input.shift();
 
         var output_i = (valor >>> 0).toString(2);
-        output_i = output_i.split('');        
-        output_i = zeros.concat(output_i);
-        output_i = output_i.slice(-processors,output_i.lenght)
+        var output_arr = output_i.split('');        
+        output_arr = zeros.concat(output_arr);
+        output_arr = output_arr.slice(-processors,output_arr.length)
         //console.log(output_i);
 
         for (j = 0; j < sh; j++) {
-            last_value = output_i[0];
-            output_i.shift();
-            output_i.push(last_value);
+            var last_value = output_arr[0];
+            output_arr.shift();
+            output_arr.push(last_value);
         }
 
-        var out = output_i.toString()
+        var out = output_arr.toString()
 
         out = out.replace(/,/g, '');
         //output.push(out);
         //console.log(out);
-        dec = bin2dec(out);
+        var dec = bin2dec(out);
         output.push(dec)
         console.log("salida oerfect shuffle " + dec);
 
-        output_i = NaN;
-        out = NaN;
+        output_arr = [];
+        out = '';
     }
     //console.log(output);
     return output;
