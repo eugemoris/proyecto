@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as $ from 'jquery';
 
 var patrones = [];
+var list_output = [];
 
 @Component({
   selector: 'app-root',
@@ -34,8 +35,8 @@ window.onload = function () {
   }
   document.getElementById("start").onclick = function (evt) {
         var cantProc = $("#cantProc").val();
-        console.log("El valor es: "+ $("#cantProc").val());
-        console.log("patrones elegidos: " + patrones);
+        //console.log("El valor es: "+ $("#cantProc").val());
+        //console.log("patrones elegidos: " + patrones);
         calculatePatrons(cantProc);
   }
 }
@@ -47,10 +48,10 @@ function calculatePatrons(cantidad_procesadores) {
  
 
   //var cantidad_procesadores = jQuery("#cantProc").val()
-    console.log("cantidad procesadores: "+ cantidad_procesadores);
+    //console.log("cantidad procesadores: "+ cantidad_procesadores);
   var cantidad_bits_bin = (parseInt(cantidad_procesadores)).toString(2); // CAMBIO A PEDIR LOS BITS
   var cantidad_bits = (cantidad_bits_bin.length) - 1;
-  console.log("cantidad de bit : " + cantidad_bits);
+  //console.log("cantidad de bit : " + cantidad_bits);
 
   //var cantidad_bits =3;
   var input = [];
@@ -65,58 +66,52 @@ function calculatePatrons(cantidad_procesadores) {
   else {
       alert("no se selecciono ningun patron")
   }
-  console.log(patrones);
+  //console.log(patrones);
   while (continuar) {
       //console.log(pat);
       var x = patrones.shift();
       switch (x) {
           case 0:
               // codigo correspondiente a perfect shuflle
-              console.log("entro en cero");
               var output = perfect_shuffle(input, cantidad_bits);
-              console.log(output);
-              //momento para graficar
-              input = output; //salida de metodos en decimales
+              list_output.push(output);
               break;
+
           case 1:
               // codigo correspondiente a bit reversal
-              console.log("entro en uno" + input);
-
               var output = bit_reversal(input, cantidad_bits);
-              //momento para graficar
-              input = output; //salida de metodos en decimales
+              list_output.push(output);
               break;
+
           case 2:
               // codigo correspondiente a butterfly
-              console.log("entro en dos" + input);
-
               var output = butterfly(input, cantidad_bits);
-              //momento para graficar
-              input = output; //salida de metodos en decimales
+              list_output.push(output);
               break;
+
           case 3:
-              // codigo correspondiente a exchange
-              var output = exchange(input, cantidad_bits);
-              //input = output;
-              break;
+            // codigo correspondiente a exchange
+            var output = exchange(input, cantidad_bits);
+            list_output.push(output);
+            break;
+
           case 4:
-              //var output = barrel(input, cantidad_bits);
-              //input = output;
-              // codigo correspondiente a barrel
-              break;
+            // codigo correspondiente a barrel
+            //var output = barrel(input, cantidad_bits);
+            //list_output.push(output);
+            break;
+
           case 5:
-              var output = baseline(input, cantidad_bits);
-              input = output;
-              // codigo correspondiente a baseline
-              break;
+            // codigo correspondiente a baseline
+            var output = baseline(input, cantidad_bits);
+            list_output.push(output);
+            break;
+
           default:
-              //   console.log("entra por default" + x);
-              var continuar = false;
-              patrones = [];
-              break;
-          // code block
+            var continuar = false;
+            patrones = [];
+            break;
       }
-      //console.log("final" + pat);
   }
 }
 
