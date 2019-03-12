@@ -4,6 +4,7 @@ import * as $ from 'jquery';
 var patrones = [];
 var input_extra = [];
 var list_output = [];
+var cant_proc;
 
 @Component({
   selector: 'app-root',
@@ -14,26 +15,73 @@ export class AppComponent {
   title = 'Simulador de Interconexiones';
 }
 
+function validarEntero(valor){ 
+    //intento convertir a entero. 
+    //si era un entero no le afecta, si no lo era lo intenta convertir 
+     valor = parseInt(valor) 
+
+    //Compruebo si es un valor numérico 
+    if (isNaN(valor)) { 
+       //entonces (no es numero) devuelvo el valor cadena vacia 
+       return false; 
+    }else{ 
+       //En caso contrario (Si era un número) devuelvo el valor 
+       return true; 
+    } 
+} 
+
 window.onload = function () {
-    
+    $('#start').prop('disabled', true);
+    $("#start").css("background-color", "grey");
+
+
   document.getElementById("p_shuffle").onclick = function (evt) {
     var k = prompt("Valor de K que desee utilizar: ");
+    while (validarEntero(k) == false){
+        alert("El valor debe ser un numero positivo");
+        var k = prompt("Valor de K que desee utilizar: ");
+    }
     input_extra.push(parseInt(k));
     patrones.push(0);
+    cant_proc = $("#cantProc").val()
+    if ((patrones.length > 0)&& (cant_proc!= undefined))
+    {
+        $('#start').prop('disabled', false);
+        $("#start").css("background-color", "#1C738D");
+    }
+
   }
   document.getElementById("bit_reversal").onclick = function (evt) {
       input_extra.push(-1);
       patrones.push(1);
+      cant_proc = $("#cantProc").val()
+      if ((patrones.length > 0)&& (cant_proc!= undefined))
+      {
+          $('#start').prop('disabled', false);
+          $("#start").css("background-color", "#1C738D");
+      }
   }
   document.getElementById("butterfly").onclick = function (evt) {
     var input_xi = prompt("Valor de I que desee utilizar: ");
     input_extra.push(parseInt(input_xi));
     patrones.push(2);
+    cant_proc = $("#cantProc").val()
+    if ((patrones.length > 0)&& (cant_proc!= undefined))
+    {
+        $('#start').prop('disabled', false);
+        $("#start").css("background-color", "#1C738D");
+    }
   }
   document.getElementById("exchange").onclick = function (evt) {
     var input_k = prompt("Valor de K que desee utilizar: ");
     input_extra.push(parseInt(input_k));
     patrones.push(3);
+    cant_proc = $("#cantProc").val()
+    if ((patrones.length > 0)&& (cant_proc != undefined))
+    {
+        $('#start').prop('disabled', false);
+        $("#start").css("background-color", "#1C738D");
+    }
   }
   document.getElementById("barrel").onclick = function (evt) {
 
@@ -43,15 +91,34 @@ window.onload = function () {
     var k = prompt("Valor de K que desee utilizar: ");
     input_extra.push(parseInt(k));
       patrones.push(5);
+      cant_proc = $("#cantProc").val()
+      if ((patrones.length > 0)&& (cant_proc!= undefined))
+      {
+          $('#start').prop('disabled', false);
+          $("#start").css("background-color", "#1C738D");
+      }
   }
   document.getElementById("start").onclick = function (evt) {
-        var cantProc = $("#cantProc").val(); //se toma el valor de cuadro de texto
-        calculatePatrons(cantProc);
+    calculatePatrons(cant_proc);
+    $('#cantProc').val(''); //vacia la cantidad de procesadores
+    $('#start').prop('disabled', true); //deshabilita el boton start
+    $("#start").css("background-color", "grey"); //pinta gris el boton para que detone la deshabilitacion
+    patrones = [];
+    input_extra = [];
+    list_output = [];
+    cant_proc=undefined;
+
   }
   document.getElementById("restart").onclick = function (evt) {
     patrones = [];
     input_extra = [];
     list_output = [];
+    cant_proc=undefined;
+    $('#cantProc').val('');
+    document.getElementById("cantProc").innerHTML = "";
+    $('#start').prop('disabled', true);
+    $("#start").css("background-color", "grey");
+
   }
 }
 
@@ -73,13 +140,12 @@ function calculatePatrons(cantidad_procesadores) {
   console.log("patrones en el arreglo: " + patrones);
   console.log("input extra: " + input_extra);
 
-  
   var continuar = false;
   if (patrones.length != 0) {
       continuar = true;
   }
   else {
-      alert("no se selecciono ningun patron")
+      alert("No quedaron mas patrones");
   }
 
   while (continuar) {

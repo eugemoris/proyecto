@@ -25,15 +25,23 @@ body {
 p.serif {
   font-family: "Times New Roman", Monaco, monospace;
   font-size: 30px;
+  color: grey;
 }
 
 p.title{
   font-family: "Times New Roman", Monaco, monospace;
   font-size: 50px;
+  color: grey;
 }
 
 h2{
   font-family: "Times New Roman", Monaco, monospace;
+  color: grey;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 input[type=number] {
@@ -56,6 +64,13 @@ input[type=number] {
   <img width="400" alt="Angular Logo" src="assets/img/Logo_UNICEN.gif">
 </div>
 
+<div>
+  <p class="serif">
+    Cantidad de Procesadores a Utilizar:
+  </p>
+    <input type="number" id="cantProc" min="0" name="cantProc">
+  </div>
+
 <div style="text-align:left">
 <p class="serif">
     Seleccione los patrones  utilizar:
@@ -68,10 +83,8 @@ input[type=number] {
   <input id= "exchange" type="button" class="button" value="Exchange">
   <input id= "baseline" type="button" class="button" value="Baseline">
   </h4>
-  <div>
-    <label> Cantidad de Procesadores a Utilizar  </label>
-    <input type="number" id="cantProc" name="cantProc">
-  </div>
+  
+
   <h5>
   <input id= "start" type="button" class="button" value="Start!">
   <input id= "restart" type="button" class="button" value="Restart!!">
