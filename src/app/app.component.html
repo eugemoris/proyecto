@@ -87,10 +87,40 @@ input[type=number] {
 
   <h5>
   <input id= "start" type="button" class="button" value="START!">
+
   <input id= "restart" type="button" class="button" value="RESET!!">
 
   </h5>
   
+</div>
+
+
+
+	<style type="text/css">
+		button {
+		    background-color: #1C738D;
+		    border: none;
+		    color: white;
+		    /*padding: 14px 40px;*/
+		    text-align: center;
+		    text-decoration: none;
+		    display: inline-block;
+		    font-size: 16px;
+		    margin: 4px 2px;
+		    cursor: pointer;
+		    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+		}
+		.button-cargar {padding: 14px 40px;}
+		body { background-color: #ECE8D6;}
+		li {padding: 3px; border: 1px solid #1c738d6b; list-style: none;}
+	</style>
+<div style="margin-bottom: 20px;">
+	<button id="cargar" class="button-cargar">Cargar Etapas</button>
+</div>
+<div id="total" style="display: -webkit-box;">
+	<div>
+
+	</div>
 </div>
 
 <h2>
@@ -100,5 +130,6 @@ A contunuación tenemos un link a la pagina de la catedra: </h2>
     <h2><a target="_blank" rel="noopener" href="http://arqui2.alumnos.exa.unicen.edu.ar/">Arquitectura de Computadoras y Técnicas Digitales</a></h2>
   </li>
 </ul>
+
 
 <router-outlet></router-outlet>

@@ -5,14 +5,21 @@ var patrones = [];
 var input_extra = [];
 var list_output = [];
 var cant_proc;
+var contador = 1;
+var cant_button;
+var etapas;
+var lista;
+var cantidad_bits;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'Simulador de Interconexiones';
+
 }
 
 function validarEntero(valor){ 
@@ -111,11 +118,21 @@ window.onload = function () {
     }
     document.getElementById("start").onclick = function (evt) {
         calculatePatrons(cant_proc);
-        restart_values();
+        console.log("proceso los valores");
+
+        //llamas nuevo html
+
+        //restart_values();
 
     }
     document.getElementById("restart").onclick = function (evt) {
         restart_values();
+    }
+    document.getElementById("cargar").onclick = function(evt){
+        cargar();
+        document.getElementById("0-0").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-0"));
+        }
     }
 }
 
@@ -445,6 +462,154 @@ function perfect_shuffle(input, processors,k) {
         out = '';
     }
     return output;
+}
+
+
+function funcion_dibujar(boton) {
+    var one = true;
+    var current_id = boton.id;
+    console.log(current_id+'s');
+    var next_id = "";
+    var first_list = current_id[0];
+    var second_list = current_id[2];
+    var zona_id = "zona-1";
+console.log("first_list"+first_list+" etapas"+etapas);
+while(first_list < (etapas-1)){
+    if(!one){
+        first_list = contador;
+        second_list = current_id[2];
+        current_id=next_id;
+        var pos_zona = parseInt(first_list)+1;
+        zona_id = "zona-"+pos_zona;
+        contador++;
+    }else{
+        one = false;
+    }
+    console.log(lista[first_list][second_list]);
+    next_id = contador+"-"+lista[first_list][second_list];
+    var first = document.getElementById(current_id);	
+      var second = document.getElementById(next_id);
+      var dibujo = document.getElementById(zona_id);
+      
+      if(document.getElementById(current_id+next_id) != undefined){
+          if(jQuery("#"+current_id+next_id).css("visibility") == "hidden"){
+              jQuery("#"+current_id+next_id).css("visibility", "visible");
+          }else{
+              jQuery("#"+current_id+next_id).css("visibility", "hidden");
+          }
+      }else{
+        if(cantidad_bits > 3){
+            var rect = first.getBoundingClientRect();
+            var rect2 = second.getBoundingClientRect();
+            var rect3 = dibujo.getBoundingClientRect();
+            var more = document.getElementById(zona_id).innerHTML;
+            more = more + '<line id="'+current_id+next_id+'" x1="'+(rect.left - rect3.left + 50)+'" y1="'+(rect.top - rect3.top + 13)+'" x2="'+(rect2.left - rect3.left)+'" y2="'+(rect2.top - rect3.top + 13)+'" style="visibility: visible; stroke:#f00; stroke-width:3"></line>';
+            document.getElementById(zona_id).innerHTML = more;
+        }else{
+            var rect = first.getBoundingClientRect();
+            var rect2 = second.getBoundingClientRect();
+            var rect3 = dibujo.getBoundingClientRect();
+            var more = document.getElementById(zona_id).innerHTML;
+            more = more + '<line id="'+current_id+next_id+'" x1="'+(rect.left)+'" y1="'+(rect.top)+'" x2="'+(rect2.left)+'" y2="'+(rect2.top)+'" style="visibility: visible; stroke:#f00; stroke-width:3"></line>';
+            document.getElementById(zona_id).innerHTML = more;
+        }
+    }
+    //console.log("cantidad_bits:"+cantidad_bits);
+    /*if(cantidad_bits > 3){
+        console.log("ID-LINEA:"+current_id+lista[first_list][second_list]);
+        var rect = first.getBoundingClientRect();
+        var rect2 = second.getBoundingClientRect();
+        var rect3 = dibujo.getBoundingClientRect();
+        var more = document.getElementById(zona_id).innerHTML;
+        more = more + '<line id="'+current_id+next_id+'" x1="'+(rect.left - rect3.left + 50)+'" y1="'+(rect.top - rect3.top + 13)+'" x2="'+(rect2.left - rect3.left)+'" y2="'+(rect2.top - rect3.top + 13)+'" style="visibility: visible; stroke:#f00; stroke-width:3"></line>';
+        document.getElementById(zona_id).innerHTML = more;
+    }else{
+        var rect = first.getBoundingClientRect();
+        var rect2 = second.getBoundingClientRect();
+        var rect3 = dibujo.getBoundingClientRect();
+        var more = document.getElementById(zona_id).innerHTML;
+        more = more + '<line id="'+current_id+lista[first_list][second_list]+'" x1="'+(rect.left - rect3.left + 30)+'" y1="'+(rect.top - rect3.top + 13)+'" x2="'+(rect2.left - rect3.left)+'" y2="'+(rect2.top - rect3.top + 13)+'" style="visibility: visible; stroke:#f00; stroke-width:3"></line>';
+        document.getElementById(zona_id).innerHTML = more;
+    }*/
+}
+contador = 1;
+}
+
+function get_ul() {
+for (var i = 1; i <4; i++) {
+    var ultima_lista = document.getElementById("total").innerHTML;
+    var lista_html = '<svg id="zona-'+contador+'" height="232" width="150" style="margin-top: 16px;"></svg>';
+    lista_html = lista_html+'<div style="margin-left: -40px;">';
+        lista_html = lista_html+'<ul id="original">';
+            lista_html = lista_html+'<li><button id="'+contador+'-0">000</button></li>';
+            lista_html = lista_html+'<li><button id="'+contador+'-1">001</button></li>';
+            lista_html = lista_html+'<li><button id="'+contador+'-2">010</button></li>';
+            lista_html = lista_html+'<li><button id="'+contador+'-3">011</button></li>';
+            lista_html = lista_html+'<li><button id="'+contador+'-4">100</button></li>';
+            lista_html = lista_html+'<li><button id="'+contador+'-5">101</button></li>';
+            lista_html = lista_html+'<li><button id="'+contador+'-6">110</button></li>';
+            lista_html = lista_html+'<li><button id="'+contador+'-7">111</button></li>';
+        lista_html = lista_html+'</ul>';
+    lista_html = lista_html+'</div>';
+    document.getElementById("total").innerHTML = ultima_lista + lista_html;
+        contador = contador + 1;
+}
+contador = 1;
+}
+
+function to_binary(num){
+var binary = num.toString(2);
+while(binary.length < cantidad_bits){
+    binary = '0' + binary;
+}
+return binary;
+}
+
+function cargar(){
+    
+    //var lista = [["0", "1", "2", "3", "4", "5", "6", "7","8", "9", "10", "11", "12", "13", "14", "15"],["0", "4", "2", "13", "1", "5", "6", "7","10", "9", "8", "11", "12", "3", "14", "15"],["10", "1", "8", "5", "4", "3", "14", "7","2", "9", "0", "11", "12", "13", "6", "15"]];
+lista = list_output;
+console.log(list_output);
+etapas = lista.length;
+cant_button = lista[0].length;
+console.log(cant_button);
+get_ul_initial();
+get_ul_2();
+}
+
+function get_ul_2() {
+for (var i = 1; i <=etapas; i++) {
+    var ultima_lista = document.getElementById("total").innerHTML;
+    var lista_html = '<svg id="zona-'+i+'" height="576" width="150" style="margin-top: 16px;"></svg>';
+    lista_html = lista_html+'<div style="margin-left: -40px;">';
+        lista_html = lista_html+'<ul id="original">';
+            var j = 0;
+            while(j < cant_button){
+                lista_html = lista_html+'<li><button id="'+i+'-'+j+'">'+to_binary(j)+'</button></li>';
+                j++;
+            }
+        lista_html = lista_html+'</ul>';
+    lista_html = lista_html+'</div>';
+    document.getElementById("total").innerHTML = ultima_lista + lista_html;
+}
+}
+function get_ul_initial() {
+for (var i = 0; i <1; i++) {
+    var ultima_lista = document.getElementById("total").innerHTML;
+    var lista_html = '<div>';
+        lista_html = lista_html+'<ul id="original">';
+            var j = 0;
+            console.log("entra"+cant_button);
+            while(j < cant_button){
+                
+                lista_html = lista_html + '<li><button id="'+ i + '-' + j + '" (click)="funcion_dibujar(this)">' + to_binary(j) + '</button></li>';
+                j++;
+            }
+        lista_html = lista_html+'</ul>';
+    lista_html = lista_html+'</div>';
+    document.getElementById("total").innerHTML = ultima_lista + lista_html;
+
+}
 }
 
 
