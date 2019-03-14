@@ -40,13 +40,11 @@ window.onload = function () {
         var k = prompt("Valor de K que desee utilizar: "); //verificar numero positivo
         while (validarEntero(k) == false){
             alert("El valor debe ser un numero positivo");
-            k = prompt("Valor de K que desee utilizar: ");
+            var k = prompt("Valor de K que desee utilizar: ");
         }
-
         input_extra.push(parseInt(k));
         patrones.push(0);
         cant_proc = $("#cantProc").val();
-
         verificarBoton();
 
     }
