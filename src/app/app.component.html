@@ -3,14 +3,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <style>
+  div {
+    margin-left: 15px;
+  }
+    .button-lineas {
+        background-color: #1C738D !important;
+        border: none !important;
+        color: white !important;
+        /*padding: 14px 40px;*/
+        text-align: center !important;
+        text-decoration: none !important;
+        display: inline-block !important;
+        font-size: 16px !important;
+        margin: 4px 2px !important;
+        cursor: pointer !important;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19) !important;
+    }
+
 body {
   background-color: #ECE8D6; 
 }
 .button {
   background-color: #1C738D;
-  border: none;
+  border: 1px solid #1C738D;
   color: white;
   padding: 14px 40px;
   text-align: center;
@@ -20,6 +37,11 @@ body {
   margin: 4px 2px;
   cursor: pointer;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.button:hover {
+  color: #1C738D;
+  background-color: white;
 }
 
 p.serif {
@@ -54,6 +76,7 @@ input[type=number] {
 </style>
 </head>
 <body>
+  <div id="script-id"></div>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
 <div style="text-align:center">
@@ -68,7 +91,7 @@ input[type=number] {
   <p class="serif">
     Cantidad de Procesadores a Utilizar:
   </p>
-    <input type="number" id="cantProc" min="0" name="cantProc">
+    <input type="number" id="cantProc" min="0" name="cantProc" placeholder="Cantidad de procesadores elegidos">
   </div>
 
 <div style="text-align:left">
@@ -97,7 +120,7 @@ input[type=number] {
 
 
 	<style type="text/css">
-		button {
+		button{
 		    background-color: #1C738D;
 		    border: none;
 		    color: white;
@@ -115,7 +138,7 @@ input[type=number] {
 		li {padding: 3px; border: 1px solid #1c738d6b; list-style: none;}
 	</style>
 <div style="margin-bottom: 20px;">
-	<button id="cargar" class="button-cargar">Cargar Etapas</button>
+	<button id="cargar" class="button">Cargar Etapas</button>
 </div>
 <div id="total" style="display: -webkit-box;">
 	<div>

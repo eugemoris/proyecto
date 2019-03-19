@@ -133,6 +133,51 @@ window.onload = function () {
         document.getElementById("0-0").onclick = function(evt){
             funcion_dibujar(document.getElementById("0-0"));
         }
+        document.getElementById("0-1").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-1"));
+        }
+        document.getElementById("0-2").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-2"));
+        }
+        document.getElementById("0-3").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-3"));
+        }
+        document.getElementById("0-4").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-4"));
+        }
+        document.getElementById("0-5").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-5"));
+        }
+        document.getElementById("0-6").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-6"));
+        }
+        document.getElementById("0-7").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-7"));
+        }
+        document.getElementById("0-8").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-8"));
+        }
+        document.getElementById("0-9").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-9"));
+        }
+        document.getElementById("0-10").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-10"));
+        }
+        document.getElementById("0-11").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-11"));
+        }
+        document.getElementById("0-12").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-12"));
+        }
+        document.getElementById("0-13").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-13"));
+        }
+        document.getElementById("0-14").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-14"));
+        }
+        document.getElementById("0-15").onclick = function(evt){
+            funcion_dibujar(document.getElementById("0-15"));
+        }
     }
 }
 
@@ -145,6 +190,7 @@ function restart_values(){
     $('#cantProc').val(''); //vacio cuadro de cantidad de procesos
     $('#start').prop('disabled', true); //deshabilito boton start
     $("#start").css("background-color", "grey"); //coloreo fondo en gris para denotar deshabilitacion
+    document.getElementById("total").innerHTML = "";
 }
 
 function verificarBoton(){
@@ -167,7 +213,7 @@ function generate_input(cantProcesadores){
 function calculatePatrons(cantidad_procesadores) {
 
   var cantidad_bits_bin = (parseInt(cantidad_procesadores)).toString(2); // CAMBIO A PEDIR LOS BITS
-  var cantidad_bits = (cantidad_bits_bin.length) - 1;
+  cantidad_bits = (cantidad_bits_bin.length) - 1;
 
   var continuar = false;
   if (patrones.length != 0) {
@@ -464,8 +510,7 @@ function perfect_shuffle(input, processors,k) {
     return output;
 }
 
-
-function funcion_dibujar(boton) {
+/*function funcion_dibujar(boton) {
     var one = true;
     var current_id = boton.id;
     console.log(current_id+'s');
@@ -514,47 +559,74 @@ while(first_list < (etapas-1)){
             document.getElementById(zona_id).innerHTML = more;
         }
     }
-    //console.log("cantidad_bits:"+cantidad_bits);
-    /*if(cantidad_bits > 3){
-        console.log("ID-LINEA:"+current_id+lista[first_list][second_list]);
-        var rect = first.getBoundingClientRect();
-        var rect2 = second.getBoundingClientRect();
-        var rect3 = dibujo.getBoundingClientRect();
-        var more = document.getElementById(zona_id).innerHTML;
-        more = more + '<line id="'+current_id+next_id+'" x1="'+(rect.left - rect3.left + 50)+'" y1="'+(rect.top - rect3.top + 13)+'" x2="'+(rect2.left - rect3.left)+'" y2="'+(rect2.top - rect3.top + 13)+'" style="visibility: visible; stroke:#f00; stroke-width:3"></line>';
-        document.getElementById(zona_id).innerHTML = more;
-    }else{
-        var rect = first.getBoundingClientRect();
-        var rect2 = second.getBoundingClientRect();
-        var rect3 = dibujo.getBoundingClientRect();
-        var more = document.getElementById(zona_id).innerHTML;
-        more = more + '<line id="'+current_id+lista[first_list][second_list]+'" x1="'+(rect.left - rect3.left + 30)+'" y1="'+(rect.top - rect3.top + 13)+'" x2="'+(rect2.left - rect3.left)+'" y2="'+(rect2.top - rect3.top + 13)+'" style="visibility: visible; stroke:#f00; stroke-width:3"></line>';
-        document.getElementById(zona_id).innerHTML = more;
-    }*/
 }
 contador = 1;
-}
+}*/
 
-function get_ul() {
-for (var i = 1; i <4; i++) {
-    var ultima_lista = document.getElementById("total").innerHTML;
-    var lista_html = '<svg id="zona-'+contador+'" height="232" width="150" style="margin-top: 16px;"></svg>';
-    lista_html = lista_html+'<div style="margin-left: -40px;">';
-        lista_html = lista_html+'<ul id="original">';
-            lista_html = lista_html+'<li><button id="'+contador+'-0">000</button></li>';
-            lista_html = lista_html+'<li><button id="'+contador+'-1">001</button></li>';
-            lista_html = lista_html+'<li><button id="'+contador+'-2">010</button></li>';
-            lista_html = lista_html+'<li><button id="'+contador+'-3">011</button></li>';
-            lista_html = lista_html+'<li><button id="'+contador+'-4">100</button></li>';
-            lista_html = lista_html+'<li><button id="'+contador+'-5">101</button></li>';
-            lista_html = lista_html+'<li><button id="'+contador+'-6">110</button></li>';
-            lista_html = lista_html+'<li><button id="'+contador+'-7">111</button></li>';
-        lista_html = lista_html+'</ul>';
-    lista_html = lista_html+'</div>';
-    document.getElementById("total").innerHTML = ultima_lista + lista_html;
-        contador = contador + 1;
-}
-contador = 1;
+function funcion_dibujar(boton) {
+    //console.log("Entra Elvis");
+        var one = true;
+        var current_id = boton.id;
+        var next_id = "";
+        var first_list = current_id[0];
+        var second_list = current_id[2];
+        var zona_id = "zona-1";
+
+    while(first_list < (etapas)){
+        if(!one){
+            //first_list = contador;
+            second_list = current_id[2];
+            current_id=next_id;
+            var pos_zona = parseInt(first_list)+1;
+            zona_id = "zona-"+pos_zona;
+            contador++;
+        }else{
+            one = false;
+        }
+        //console.log("je"+first_list);
+        next_id = contador+"-"+lista[first_list][second_list];
+        var first = document.getElementById(current_id);    
+        var second = document.getElementById(next_id);
+        var dibujo = document.getElementById(zona_id);
+        
+        if(document.getElementById(current_id+next_id) != undefined){
+            if(jQuery("#"+current_id+next_id).css("visibility") == "hidden"){
+                jQuery("#"+current_id+next_id).css("visibility", "visible");
+            }else{
+                jQuery("#"+current_id+next_id).css("visibility", "hidden");
+            }
+        }else{
+            if(cantidad_bits > 3){
+                var rect = jQuery("#"+current_id).position();
+                var rect2 = jQuery("#"+next_id).position();
+                var rect3 = jQuery("#"+zona_id).position(); 
+                //var rect = first.getBoundingClientRect();
+                //var rect2 = second.getBoundingClientRect();
+                //var rect3 = dibujo.getBoundingClientRect();
+                var more = document.getElementById(zona_id).innerHTML;
+                more = more + '<line id="'+current_id+next_id+'" x1="'+(rect.left - rect3.left + 50)+'" y1="'+(rect.top - rect3.top + 13)+'" x2="'+(rect2.left - rect3.left)+'" y2="'+(rect2.top - rect3.top + 13)+'" style="visibility: visible; stroke:#f00; stroke-width:4px"></line>';
+                document.getElementById(zona_id).innerHTML = more;
+            }else{
+                //var rect = first.getBoundingClientRect();
+                //var rect2 = second.getBoundingClientRect();
+                //var rect3 = dibujo.getBoundingClientRect();
+
+                var rect = jQuery("#"+current_id).position();
+                var rect2 = jQuery("#"+next_id).position();
+                var rect3 = jQuery("#"+zona_id).position(); 
+                
+                console.log("next_id:"+next_id);
+                var more = document.getElementById(zona_id).innerHTML;
+               // console.log("Boton 1:"+rect.left+"-"+rect.top);
+               // console.log("Boton 2:"+rect2.left+"-"+rect2.top);
+               // console.log("Zona:"+rect3.left+"-"+rect3.top);
+                more = more + '<line id="'+current_id+next_id+'" x1="'+(rect.left - rect3.left + 34)+'" y1="'+(rect.top - rect3.top)+'" x2="'+(rect2.left - rect3.left)+'" y2="'+(rect2.top - rect3.top)+'" style="visibility: visible; stroke:#f00; stroke-width:4px"></line>';
+                document.getElementById(zona_id).innerHTML = more;
+            }
+        }
+    first_list++;
+    }
+    contador = 1;
 }
 
 function to_binary(num){
@@ -580,12 +652,16 @@ get_ul_2();
 function get_ul_2() {
 for (var i = 1; i <=etapas; i++) {
     var ultima_lista = document.getElementById("total").innerHTML;
-    var lista_html = '<svg id="zona-'+i+'" height="576" width="150" style="margin-top: 16px;"></svg>';
+    if(cantidad_bits > 3){
+        var lista_html = '<svg id="zona-'+i+'" height="672" width="150" style="margin-top: 16px;"></svg>';
+    }else{
+        var lista_html = '<svg id="zona-'+i+'" height="337" width="150" style="margin-top: 16px;"></svg>';   
+    }
     lista_html = lista_html+'<div style="margin-left: -40px;">';
         lista_html = lista_html+'<ul id="original">';
             var j = 0;
             while(j < cant_button){
-                lista_html = lista_html+'<li><button id="'+i+'-'+j+'">'+to_binary(j)+'</button></li>';
+                lista_html = lista_html+'<li style="padding: 3px; border: 1px solid #1c738d6b; list-style: none;"><button id="'+i+'-'+j+'" style="background-color: #1C738D;border: none;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer;box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">'+to_binary(j)+'</button></li>';
                 j++;
             }
         lista_html = lista_html+'</ul>';
@@ -599,10 +675,9 @@ for (var i = 0; i <1; i++) {
     var lista_html = '<div>';
         lista_html = lista_html+'<ul id="original">';
             var j = 0;
-            console.log("entra"+cant_button);
             while(j < cant_button){
                 
-                lista_html = lista_html + '<li><button id="'+ i + '-' + j + '" (click)="funcion_dibujar(this)">' + to_binary(j) + '</button></li>';
+                lista_html = lista_html + '<li style="padding: 3px; border: 1px solid #1c738d6b; list-style: none;"><button class="button-lineas" id="'+ i + '-' + j + '" (click)="funcion_dibujar(this)" style="background-color: #1C738D;border: none;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer;box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">' + to_binary(j) + '</button></li>';
                 j++;
             }
         lista_html = lista_html+'</ul>';
@@ -611,6 +686,3 @@ for (var i = 0; i <1; i++) {
 
 }
 }
-
-
-
