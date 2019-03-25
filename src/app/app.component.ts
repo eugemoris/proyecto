@@ -43,91 +43,110 @@ window.onload = function () {
     $("#start").css("background-color", "grey");
 
     document.getElementById("p_shuffle").onclick = function (evt) {
-
-        var k = prompt("Valor de K que desee utilizar: "); //verificar numero positivo
-        while (validarEntero(k) == false){
-            alert("El valor debe ser un numero positivo");
-            var k = prompt("Valor de K que desee utilizar: ");
+        if(document.getElementById("original") != undefined){
+            alert("Debe reiniciar primero.");
+        }else{
+            var k = prompt("Valor de K que desee utilizar: "); //verificar numero positivo
+            while (validarEntero(k) == false){
+                alert("El valor debe ser un numero positivo");
+                var k = prompt("Valor de K que desee utilizar: ");
+            }
+            input_extra.push(parseInt(k));
+            patrones.push(0);
+            //cant_proc = $("#cantProc").val();
+            verificarBoton();
         }
-        input_extra.push(parseInt(k));
-        patrones.push(0);
-        cant_proc = $("#cantProc").val();
-        verificarBoton();
-
     }
-    document.getElementById("bit_reversal").onclick = function (evt) {
 
-        input_extra.push(-1); // no lleva valor extra
-        patrones.push(1);
-        cant_proc = $("#cantProc").val();
-
+    jQuery("#cantProc").change(function(){
+        console.log("Hola hola");
         verificarBoton();
+    });
+
+    document.getElementById("bit_reversal").onclick = function (evt) {
+        if(document.getElementById("original") != undefined){
+            alert("Debe reiniciar primero.");
+        }else{
+            input_extra.push(-1); // no lleva valor extra
+            patrones.push(1);
+            //cant_proc = $("#cantProc").val();
+            verificarBoton();
+        }
     }
     document.getElementById("butterfly").onclick = function (evt) {
-        
-        var input_xi = prompt("Valor de K que desee utilizar: "); //verificar numero positivo
-        while (validarEntero(input_xi) == false){
-            alert("El valor debe ser un numero positivo");
-            input_xi = prompt("Valor de K que desee utilizar: ");
+        if(document.getElementById("original") != undefined){
+            alert("Debe reiniciar primero.");
+        }else{
+            var input_xi = prompt("Valor de K que desee utilizar: "); //verificar numero positivo
+            while (validarEntero(input_xi) == false){
+                alert("El valor debe ser un numero positivo");
+                input_xi = prompt("Valor de K que desee utilizar: ");
+            }
+
+            input_extra.push(parseInt(input_xi));
+            patrones.push(2);
+            //cant_proc = $("#cantProc").val();
+
+            verificarBoton();
         }
-
-        input_extra.push(parseInt(input_xi));
-        patrones.push(2);
-        cant_proc = $("#cantProc").val();
-
-        verificarBoton();
     }
     document.getElementById("exchange").onclick = function (evt) {
+        if(document.getElementById("original") != undefined){
+            alert("Debe reiniciar primero.");
+        }else{
+            var k = prompt("Valor de K que desee utilizar: "); //verificar numero positivo
+            while (validarEntero(k) == false){
+                alert("El valor debe ser un numero positivo");
+                k = prompt("Valor de K que desee utilizar: ");
+            }
 
-        var k = prompt("Valor de K que desee utilizar: "); //verificar numero positivo
-        while (validarEntero(k) == false){
-            alert("El valor debe ser un numero positivo");
-            k = prompt("Valor de K que desee utilizar: ");
+            input_extra.push(parseInt(k));
+            patrones.push(3);
+           //cant_proc = $("#cantProc").val(); 
+            
+            verificarBoton();
         }
-
-        input_extra.push(parseInt(k));
-        patrones.push(3);
-        cant_proc = $("#cantProc").val();
-        
-        verificarBoton();
     }
     document.getElementById("barrel").onclick = function (evt) {
-        var k = prompt("Valor de K que desee utilizar: "); //verificar numero positivo
-        while (validarEntero(k) == false){
-            alert("El valor debe ser un numero positivo");
-            k = prompt("Valor de K que desee utilizar: ");
+        if(document.getElementById("original") != undefined){
+            alert("Debe reiniciar primero.");
+        }else{
+            var k = prompt("Valor de K que desee utilizar: "); //verificar numero positivo
+            while (validarEntero(k) == false){
+                alert("El valor debe ser un numero positivo");
+                k = prompt("Valor de K que desee utilizar: ");
+            }
+            input_extra.push(parseInt(k));
+            patrones.push(4);
+            //cant_proc = $("#cantProc").val();
+            verificarBoton();
         }
-        input_extra.push(parseInt(k));
-        patrones.push(4);
-        cant_proc = $("#cantProc").val();
-        verificarBoton();
     }
     document.getElementById("baseline").onclick = function (evt) {
+        if(document.getElementById("original") != undefined){
+            alert("Debe reiniciar primero.");
+        }else{
+            var k = prompt("Valor de K que desee utilizar: "); //verificar numero positivo
+            while (validarEntero(k) == false){
+                alert("El valor debe ser un numero positivo");
+                k = prompt("Valor de K que desee utilizar: ");
+            }
+            
+            input_extra.push(parseInt(k));
+            patrones.push(5);
+            //cant_proc = $("#cantProc").val();
 
-        var k = prompt("Valor de K que desee utilizar: "); //verificar numero positivo
-        while (validarEntero(k) == false){
-            alert("El valor debe ser un numero positivo");
-            k = prompt("Valor de K que desee utilizar: ");
+            verificarBoton();
         }
-        
-        input_extra.push(parseInt(k));
-        patrones.push(5);
-        cant_proc = $("#cantProc").val();
-
-        verificarBoton();
     }
     document.getElementById("start").onclick = function (evt) {
         calculatePatrons(cant_proc);
-        console.log("proceso los valores");
-
-        //llamas nuevo html
-
-        //restart_values();
-
     }
+
     document.getElementById("restart").onclick = function (evt) {
         restart_values();
     }
+
     document.getElementById("cargar").onclick = function(evt){
         cargar();
         document.getElementById("0-0").onclick = function(evt){
@@ -194,10 +213,11 @@ function restart_values(){
 }
 
 function verificarBoton(){
-    if ((patrones.length > 0)&& (cant_proc!= undefined))
+    if ((patrones.length > 0) && (($("#cantProc").val() != undefined) && ($("#cantProc").val() != "") ))
         {
             $('#start').prop('disabled', false);
             $("#start").css("background-color", "#1C738D");
+            cant_proc = $("#cantProc").val();
         }
 }
 
@@ -347,7 +367,6 @@ function barrel(input,processor,k){
     for (var j=0; j<total; j++){
         output.push(input.shift());//elimino el primer elemento del arreglo
     }
-    //console.log(output);
     return output;
 }
 
@@ -510,86 +529,35 @@ function perfect_shuffle(input, processors,k) {
     return output;
 }
 
-/*function funcion_dibujar(boton) {
-    var one = true;
-    var current_id = boton.id;
-    console.log(current_id+'s');
-    var next_id = "";
-    var first_list = current_id[0];
-    var second_list = current_id[2];
-    var zona_id = "zona-1";
-console.log("first_list"+first_list+" etapas"+etapas);
-while(first_list < (etapas-1)){
-    if(!one){
-        first_list = contador;
-        second_list = current_id[2];
-        current_id=next_id;
-        var pos_zona = parseInt(first_list)+1;
-        zona_id = "zona-"+pos_zona;
-        contador++;
-    }else{
-        one = false;
-    }
-    console.log(lista[first_list][second_list]);
-    next_id = contador+"-"+lista[first_list][second_list];
-    var first = document.getElementById(current_id);	
-      var second = document.getElementById(next_id);
-      var dibujo = document.getElementById(zona_id);
-      
-      if(document.getElementById(current_id+next_id) != undefined){
-          if(jQuery("#"+current_id+next_id).css("visibility") == "hidden"){
-              jQuery("#"+current_id+next_id).css("visibility", "visible");
-          }else{
-              jQuery("#"+current_id+next_id).css("visibility", "hidden");
-          }
-      }else{
-        if(cantidad_bits > 3){
-            var rect = first.getBoundingClientRect();
-            var rect2 = second.getBoundingClientRect();
-            var rect3 = dibujo.getBoundingClientRect();
-            var more = document.getElementById(zona_id).innerHTML;
-            more = more + '<line id="'+current_id+next_id+'" x1="'+(rect.left - rect3.left + 50)+'" y1="'+(rect.top - rect3.top + 13)+'" x2="'+(rect2.left - rect3.left)+'" y2="'+(rect2.top - rect3.top + 13)+'" style="visibility: visible; stroke:#f00; stroke-width:3"></line>';
-            document.getElementById(zona_id).innerHTML = more;
-        }else{
-            var rect = first.getBoundingClientRect();
-            var rect2 = second.getBoundingClientRect();
-            var rect3 = dibujo.getBoundingClientRect();
-            var more = document.getElementById(zona_id).innerHTML;
-            more = more + '<line id="'+current_id+next_id+'" x1="'+(rect.left)+'" y1="'+(rect.top)+'" x2="'+(rect2.left)+'" y2="'+(rect2.top)+'" style="visibility: visible; stroke:#f00; stroke-width:3"></line>';
-            document.getElementById(zona_id).innerHTML = more;
-        }
-    }
-}
-contador = 1;
-}*/
-
+// La función recibe como parametro el mismo boton que la invoca
+/*  
+La idea es que los ID's de los botones sean a su vez la posicion de la salida de cada etapa representado
+en la lista list_output
+*/
 function funcion_dibujar(boton) {
-    //console.log("Entra Elvis");
         var one = true;
-        var current_id = boton.id;
+        var current_id = boton.id; // Boton invocador
         var next_id = "";
-        var first_list = current_id[0];
-        var second_list = current_id[2];
+        var first_list = current_id[0]; // Primer valor del id del boton indica la lista de la siguiente etapa
+        var second_list = current_id[2]; // Segundo valor del id del boton indica la posicion en la lista, que es el siguiente Boton
         var zona_id = "zona-1";
 
-    while(first_list < (etapas)){
-        if(!one){
-            //first_list = contador;
+    while(first_list < etapas){
+        if(!one){ // Me identifica si estoy dibujando en la primera etapa o en las siguientes
             second_list = current_id[2];
             current_id=next_id;
             var pos_zona = parseInt(first_list)+1;
-            zona_id = "zona-"+pos_zona;
+            zona_id = "zona-"+pos_zona; // La zona es la etiqueta html que dibuja las lineas
             contador++;
         }else{
             one = false;
         }
-        //console.log("je"+first_list);
-        next_id = contador+"-"+lista[first_list][second_list];
+        next_id = contador+"-"+lista[first_list][second_list]; // El contador es un seguimiento de la etapa hacia la cual me muevo
         var first = document.getElementById(current_id);    
         var second = document.getElementById(next_id);
         var dibujo = document.getElementById(zona_id);
         
-        if(document.getElementById(current_id+next_id) != undefined){
+        if(document.getElementById(current_id+next_id) != undefined){ // Si está definida la linea, puedo ocultarla o volver a dibujarla
             if(jQuery("#"+current_id+next_id).css("visibility") == "hidden"){
                 jQuery("#"+current_id+next_id).css("visibility", "visible");
             }else{
@@ -600,26 +568,14 @@ function funcion_dibujar(boton) {
                 var rect = jQuery("#"+current_id).position();
                 var rect2 = jQuery("#"+next_id).position();
                 var rect3 = jQuery("#"+zona_id).position(); 
-                //var rect = first.getBoundingClientRect();
-                //var rect2 = second.getBoundingClientRect();
-                //var rect3 = dibujo.getBoundingClientRect();
                 var more = document.getElementById(zona_id).innerHTML;
                 more = more + '<line id="'+current_id+next_id+'" x1="'+(rect.left - rect3.left + 50)+'" y1="'+(rect.top - rect3.top + 13)+'" x2="'+(rect2.left - rect3.left)+'" y2="'+(rect2.top - rect3.top + 13)+'" style="visibility: visible; stroke:#f00; stroke-width:4px"></line>';
                 document.getElementById(zona_id).innerHTML = more;
             }else{
-                //var rect = first.getBoundingClientRect();
-                //var rect2 = second.getBoundingClientRect();
-                //var rect3 = dibujo.getBoundingClientRect();
-
                 var rect = jQuery("#"+current_id).position();
                 var rect2 = jQuery("#"+next_id).position();
                 var rect3 = jQuery("#"+zona_id).position(); 
-                
-                console.log("next_id:"+next_id);
                 var more = document.getElementById(zona_id).innerHTML;
-               // console.log("Boton 1:"+rect.left+"-"+rect.top);
-               // console.log("Boton 2:"+rect2.left+"-"+rect2.top);
-               // console.log("Zona:"+rect3.left+"-"+rect3.top);
                 more = more + '<line id="'+current_id+next_id+'" x1="'+(rect.left - rect3.left + 34)+'" y1="'+(rect.top - rect3.top)+'" x2="'+(rect2.left - rect3.left)+'" y2="'+(rect2.top - rect3.top)+'" style="visibility: visible; stroke:#f00; stroke-width:4px"></line>';
                 document.getElementById(zona_id).innerHTML = more;
             }
@@ -629,26 +585,25 @@ function funcion_dibujar(boton) {
     contador = 1;
 }
 
+// Pasa de decimal a binario
 function to_binary(num){
-var binary = num.toString(2);
-while(binary.length < cantidad_bits){
-    binary = '0' + binary;
-}
-return binary;
+    var binary = num.toString(2);
+    while(binary.length < cantidad_bits){
+        binary = '0' + binary;
+    }
+    return binary;
 }
 
+// Inicializa las etapas
 function cargar(){
-    
-    //var lista = [["0", "1", "2", "3", "4", "5", "6", "7","8", "9", "10", "11", "12", "13", "14", "15"],["0", "4", "2", "13", "1", "5", "6", "7","10", "9", "8", "11", "12", "3", "14", "15"],["10", "1", "8", "5", "4", "3", "14", "7","2", "9", "0", "11", "12", "13", "6", "15"]];
-lista = list_output;
-console.log(list_output);
-etapas = lista.length;
-cant_button = lista[0].length;
-console.log(cant_button);
-get_ul_initial();
-get_ul_2();
+    lista = list_output;
+    etapas = lista.length;
+    cant_button = lista[0].length;
+    get_ul_initial();
+    get_ul_2();
 }
 
+// Carga los botones de todas las etapas
 function get_ul_2() {
 for (var i = 1; i <=etapas; i++) {
     var ultima_lista = document.getElementById("total").innerHTML;
@@ -669,6 +624,8 @@ for (var i = 1; i <=etapas; i++) {
     document.getElementById("total").innerHTML = ultima_lista + lista_html;
 }
 }
+
+// Carga los botones iniciales de acuerdo al numero de bits
 function get_ul_initial() {
 for (var i = 0; i <1; i++) {
     var ultima_lista = document.getElementById("total").innerHTML;
@@ -676,13 +633,11 @@ for (var i = 0; i <1; i++) {
         lista_html = lista_html+'<ul id="original">';
             var j = 0;
             while(j < cant_button){
-                
                 lista_html = lista_html + '<li style="padding: 3px; border: 1px solid #1c738d6b; list-style: none;"><button class="button-lineas" id="'+ i + '-' + j + '" (click)="funcion_dibujar(this)" style="background-color: #1C738D;border: none;color: white;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 4px 2px;cursor: pointer;box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);">' + to_binary(j) + '</button></li>';
                 j++;
             }
         lista_html = lista_html+'</ul>';
     lista_html = lista_html+'</div>';
     document.getElementById("total").innerHTML = ultima_lista + lista_html;
-
 }
 }
