@@ -18,7 +18,10 @@
     "@angular/forms": "~7.2.0",
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
+    "@angular/platform-server": "^7.2.10",
     "@angular/router": "~7.2.0",
+    "@nguniversal/express-engine": "^7.1.1",
+    "@nguniversal/module-map-ngfactory-loader": "^7.1.1",
     "angular2-materialize": "^15.1.10",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
@@ -26,6 +29,7 @@
     "jquery": "^3.3.1",
     "materialize-css": "^1.0.0",
     "rxjs": "~6.3.3",
+    "ts-loader": "^5.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
